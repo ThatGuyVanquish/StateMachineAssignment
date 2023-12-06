@@ -23,7 +23,7 @@ public:
             delete state;
     }
 
-    void handleEvent(MyEvent<T> &e)
+    void handleEvent(Event<T> &e)
     {
         this->currentState = this->currentState->handleEvent(e);
     };

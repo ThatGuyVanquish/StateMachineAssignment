@@ -2,14 +2,14 @@
 #include <sstream>
 
 template <typename T>
-class MyEvent
+class Event
 {
 private:
     long id;
     T val;
 
 public:
-    MyEvent(long id, T val) : id(id), val(val){};
+    Event(long id, T val) : id(id), val(val){};
 
     T getVal() const { return this->val; };
 

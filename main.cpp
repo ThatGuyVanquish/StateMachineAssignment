@@ -5,7 +5,7 @@
 
 // Test runner method: Receives a state machine, a list of events value to print at the end of the run if finished
 template <typename T>
-int run(StateMachine<T> *sm, const std::vector<MyEvent<T>> &events, const std::string &printOnFinish)
+int run(StateMachine<T> *sm, const std::vector<Event<T>> &events, const std::string &printOnFinish)
 {
     int counter = 0;
     for (auto e : events)
@@ -115,15 +115,15 @@ StateMachine<char>* createSM()
 // Test the 4 runs in the doc
 int part1(StateMachine<char> *sm)
 {
-    MyEvent<char> eventA(1, 'A');
-    MyEvent<char> eventB(2, 'B');
-    MyEvent<char> eventC(3, 'C');
+    Event<char> eventA(1, 'A');
+    Event<char> eventB(2, 'B');
+    Event<char> eventC(3, 'C');
 
     // Run 1 is A->A->B->C->A
-    std::vector<MyEvent<char>> events1({eventA, eventA, eventB, eventC, eventA});
+    std::vector<Event<char>> events1({eventA, eventA, eventB, eventC, eventA});
 
     // Run 2 is A->B->C^1000->A
-    std::vector<MyEvent<char>> events2({eventA, eventB});
+    std::vector<Event<char>> events2({eventA, eventB});
     for (int i = 0; i < 1000; i++)
     {
         events2.push_back(eventC);
@@ -131,10 +131,10 @@ int part1(StateMachine<char> *sm)
     events2.push_back(eventA);
 
     // Run 3 is A->C->ANY
-    std::vector<MyEvent<char>> events3({eventA, eventC, eventA});
+    std::vector<Event<char>> events3({eventA, eventC, eventA});
 
     // Run 4 would be a fail run, so just anything that doesn't start with an A event should get thrown an error
-    std::vector<MyEvent<char>> events4({eventB, eventA});
+    std::vector<Event<char>> events4({eventB, eventA});
 
 //     Comment out 3 of the 4 runs to run the tests
     std::cout << "Running sequence 1" << std::endl;
@@ -165,13 +165,13 @@ int part1(StateMachine<char> *sm)
 // Test that returning to a previous state can be resumed and continued
 int part2(StateMachine<char> *sm)
 {
-    MyEvent<char> eventA(1, 'A');
-    MyEvent<char> eventB(2, 'B');
-    MyEvent<char> eventC(3, 'C');
+    Event<char> eventA(1, 'A');
+    Event<char> eventB(2, 'B');
+    Event<char> eventC(3, 'C');
 
     // Run is A->B->C^1000->A
-    std::vector<MyEvent<char>> events({eventA, eventB});
-    std::vector<MyEvent<char>> resumedEvents;
+    std::vector<Event<char>> events({eventA, eventB});
+    std::vector<Event<char>> resumedEvents;
     for (int i = 0; i < 1000; i++)
     {
         events.push_back(eventC);

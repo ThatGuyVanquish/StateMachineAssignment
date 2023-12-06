@@ -20,7 +20,7 @@ public:
 
     ~StateHandler() = default;
 
-    State<T> *handleEvent(MyEvent<T> &e)
+    State<T> *handleEvent(Event<T> &e)
     {
         auto resultingState = this->eventResults.find(e.getVal());
         if (resultingState != this->eventResults.end())

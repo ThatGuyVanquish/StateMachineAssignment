@@ -5,6 +5,6 @@ class State
 {
 public:
     virtual ~State() = default;
-    virtual State *handleEvent(MyEvent<T> &e) = 0;
+    virtual State *handleEvent(Event<T> &e) = 0;
     virtual long getID() = 0;
 };
